@@ -1,0 +1,208 @@
+[gd_scene format=3 uid="uid://bvernu05qcm1j"]
+
+[ext_resource type="Script" uid="uid://dj1qwn8vl0bc1" path="res://scenes/debug.gd" id="1_lgrwq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_g4v7s"]
+font_size = 32
+
+[node name="Debug" type="Control" unique_id=106280478]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lgrwq")
+
+[node name="AccountSelectionMargin" type="MarginContainer" parent="." unique_id=926171321]
+process_mode = 4
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AccountsContainer" type="VBoxContainer" parent="AccountSelectionMargin" unique_id=1790916401]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="AccountSelectionMargin/AccountsContainer" unique_id=957459366]
+layout_mode = 2
+text = "Select your account:"
+label_settings = SubResource("LabelSettings_g4v7s")
+horizontal_alignment = 1
+
+[node name="TabMargin" type="MarginContainer" parent="." unique_id=755719603]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="TabContainer" type="TabContainer" parent="TabMargin" unique_id=376513592]
+layout_mode = 2
+current_tab = 0
+
+[node name="Rounds" type="Control" parent="TabMargin/TabContainer" unique_id=1276993585]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="TextMargin" type="MarginContainer" parent="TabMargin/TabContainer/Rounds" unique_id=45891431]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="TextSplit" type="HBoxContainer" parent="TabMargin/TabContainer/Rounds/TextMargin" unique_id=1930123238]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="DebugTextRaw" type="TextEdit" parent="TabMargin/TabContainer/Rounds/TextMargin/TextSplit" unique_id=1783933579]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_readonly_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+editable = false
+
+[node name="DebugTextParsed" type="TextEdit" parent="TabMargin/TabContainer/Rounds/TextMargin/TextSplit" unique_id=753519470]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_readonly_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+editable = false
+
+[node name="ButtonsMargin" type="MarginContainer" parent="TabMargin/TabContainer/Rounds" unique_id=1967439798]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -170.0
+offset_top = -113.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabMargin/TabContainer/Rounds/ButtonsMargin" unique_id=181029724]
+layout_mode = 2
+
+[node name="RoundLabel" type="Label" parent="TabMargin/TabContainer/Rounds/ButtonsMargin/VBoxContainer" unique_id=974192255]
+layout_mode = 2
+text = "1 / 1"
+horizontal_alignment = 1
+
+[node name="RoundInput" type="LineEdit" parent="TabMargin/TabContainer/Rounds/ButtonsMargin/VBoxContainer" unique_id=1279113049]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+placeholder_text = "Type hand index"
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabMargin/TabContainer/Rounds/ButtonsMargin/VBoxContainer" unique_id=623169262]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="PreviousButton" type="Button" parent="TabMargin/TabContainer/Rounds/ButtonsMargin/VBoxContainer/HBoxContainer" unique_id=326560846]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Previous"
+
+[node name="NextButton" type="Button" parent="TabMargin/TabContainer/Rounds/ButtonsMargin/VBoxContainer/HBoxContainer" unique_id=37143567]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Next"
+
+[node name="Summaries" type="Control" parent="TabMargin/TabContainer" unique_id=1326362160]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="TextMargin" type="MarginContainer" parent="TabMargin/TabContainer/Summaries" unique_id=1312167355]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="TextSplit" type="HBoxContainer" parent="TabMargin/TabContainer/Summaries/TextMargin" unique_id=1116454943]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="DebugTextRaw" type="TextEdit" parent="TabMargin/TabContainer/Summaries/TextMargin/TextSplit" unique_id=166508499]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_readonly_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+editable = false
+
+[node name="DebugTextParsed" type="TextEdit" parent="TabMargin/TabContainer/Summaries/TextMargin/TextSplit" unique_id=859353079]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_readonly_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+editable = false
+
+[node name="ButtonsMargin" type="MarginContainer" parent="TabMargin/TabContainer/Summaries" unique_id=436707960]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -170.0
+offset_top = -113.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabMargin/TabContainer/Summaries/ButtonsMargin" unique_id=259583030]
+layout_mode = 2
+
+[node name="SummaryLabel" type="Label" parent="TabMargin/TabContainer/Summaries/ButtonsMargin/VBoxContainer" unique_id=1217637091]
+layout_mode = 2
+text = "1 / 1"
+horizontal_alignment = 1
+
+[node name="SummaryInput" type="LineEdit" parent="TabMargin/TabContainer/Summaries/ButtonsMargin/VBoxContainer" unique_id=1370364451]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+placeholder_text = "Type summary index"
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabMargin/TabContainer/Summaries/ButtonsMargin/VBoxContainer" unique_id=932560907]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="PreviousButton" type="Button" parent="TabMargin/TabContainer/Summaries/ButtonsMargin/VBoxContainer/HBoxContainer" unique_id=1294033795]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Previous"
+
+[node name="NextButton" type="Button" parent="TabMargin/TabContainer/Summaries/ButtonsMargin/VBoxContainer/HBoxContainer" unique_id=1261623778]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Next"
+
+[connection signal="text_submitted" from="TabMargin/TabContainer/Rounds/ButtonsMargin/VBoxContainer/RoundInput" to="." method="_on_round_input_text_submitted"]
+[connection signal="pressed" from="TabMargin/TabContainer/Rounds/ButtonsMargin/VBoxContainer/HBoxContainer/PreviousButton" to="." method="_on_previous_round_button_pressed"]
+[connection signal="pressed" from="TabMargin/TabContainer/Rounds/ButtonsMargin/VBoxContainer/HBoxContainer/NextButton" to="." method="_on_next_round_button_pressed"]
+[connection signal="text_submitted" from="TabMargin/TabContainer/Summaries/ButtonsMargin/VBoxContainer/SummaryInput" to="." method="_on_summary_input_text_submitted"]
+[connection signal="pressed" from="TabMargin/TabContainer/Summaries/ButtonsMargin/VBoxContainer/HBoxContainer/PreviousButton" to="." method="_on_previous_summary_button_pressed"]
+[connection signal="pressed" from="TabMargin/TabContainer/Summaries/ButtonsMargin/VBoxContainer/HBoxContainer/NextButton" to="." method="_on_next_summary_button_pressed"]
