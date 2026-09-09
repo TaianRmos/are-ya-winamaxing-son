@@ -7,4 +7,4 @@ Simple desktop app tracking your Poker activity on Winamax. Using it might show 
 > [!WARNING]
 > **WORK IN PROGRESS**
 > 
-> Current state of the app: not even started
+> Current state of the app: the parsing of the hands is done
