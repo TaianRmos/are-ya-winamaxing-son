@@ -39,7 +39,5 @@ func _to_string() -> String:
 			return "%s mucks" % player_name
 		PokerEnums.ActionType.COLLECTED:
 			return "%s collected %s from pot" % [player_name, ParsingHelper.format_amount(amount)]
-		PokerEnums.ActionType.UNCALLED_RETURNED:
-			return "Uncalled bet (%s) returned to %s" % [ParsingHelper.format_amount(amount), player_name]
 		_:
 			return "%s <%s>" % [player_name, PokerEnums.ActionType.find_key(action_type)]
