@@ -1,5 +1,5 @@
-## A fully parsed Winamax tournament summary file.
-class_name PokerSummary
+## Represents the content of a summary files for tournaments
+class_name SummaryData
 extends RefCounted
 
 var tournament_name: String = ""
@@ -26,8 +26,9 @@ var mode: PokerEnums.TournamentMode = PokerEnums.TournamentMode.UNKNOWN
 var mode_raw: String = ""
 var format: PokerEnums.TournamentFormat = PokerEnums.TournamentFormat.UNKNOWN
 var format_raw: String = ""
-var speed: String = "" # e.g. "turbo" — optional, not always present
-var flight_id: String = "" # optional, not always present
+
+# Can be turbo for expresso
+var speed: String = ""
 
 var prizepool: float = 0.0
 var start_datetime_str: String = ""
@@ -46,9 +47,9 @@ func _to_string() -> String:
 	lines.append("=== Summary: %s (#%s) ===" % [tournament_name, tournament_id])
 	lines.append("Player: %s | Buy-in: %s€ + %s%s" % [
 		player_name,
-		PokerTextUtil.format_amount(buy_in),
-		PokerTextUtil.format_amount(buy_in_rake),
-		" + %s€ bounty" % PokerTextUtil.format_amount(buy_in_bounty) if buy_in_bounty > 0 else "",
+		ParsingHelper.format_amount(buy_in),
+		ParsingHelper.format_amount(buy_in_rake),
+		" + %s€ bounty" % ParsingHelper.format_amount(buy_in_bounty) if buy_in_bounty > 0 else "",
 	])
 	lines.append("Mode: %s | Format: %s | Registered: %d%s" % [
 		mode_raw,
@@ -57,13 +58,13 @@ func _to_string() -> String:
 		" - Late Registration" if late_registration else ""
 	])
 	lines.append("Prizepool: %s€ | Started: %s | Played: %s" % [
-		PokerTextUtil.format_amount(prizepool), start_datetime_str, duration_played_str,
+		ParsingHelper.format_amount(prizepool), start_datetime_str, duration_played_str,
 	])
 	lines.append("Finished: %d | Cashed: %s%s" % [
 		finish_place, str(cashed),
 		" (won %s€%s)" % [
-			PokerTextUtil.format_amount(won_amount),
-			" + %s€ bounty" % PokerTextUtil.format_amount(won_bounty) if won_bounty > 0 else "",
+			ParsingHelper.format_amount(won_amount),
+			" + %s€ bounty" % ParsingHelper.format_amount(won_bounty) if won_bounty > 0 else "",
 		] if cashed else "",
 	])
 	return "\n".join(lines)

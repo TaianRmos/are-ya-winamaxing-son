@@ -16,11 +16,11 @@ extends Control
 
 var round_index = 0
 var rounds_raw: Array[String]
-var rounds: Array[PokerRound]
+var rounds: Array[RoundData]
 
 var summary_index = 0
 var summaries_raw: Array[String]
-var summaries: Array[PokerSummary]
+var summaries: Array[SummaryData]
 
 var folder_path: String = ""
 var account_folders: Array[String] = []
@@ -90,12 +90,12 @@ func _parse_summaries_in_folder(path: String) -> Array[String]:
 
 func _parse_winamax_data() -> void:
 	rounds_raw = _parse_rounds_in_folder(folder_path)
-	rounds = ParsingEngine.parse_folder(folder_path)
+	rounds = RoundParser.parse_folder(folder_path)
 	if rounds_raw.size() != rounds.size():
 		push_error("Not the same amount of rounds parsed: %d raw and %d parsed" % [rounds_raw.size(), rounds.size()])
 	
 	summaries_raw = _parse_summaries_in_folder(folder_path)
-	summaries = WinamaxSummaryParser.parse_folder(folder_path)
+	summaries = SummaryParser.parse_folder(folder_path)
 	if summaries_raw.size() != summaries.size():
 		push_error("Not the same amount of summaries parsed: %d raw and %d parsed" % [summaries_raw.size(), summaries.size()])
 	

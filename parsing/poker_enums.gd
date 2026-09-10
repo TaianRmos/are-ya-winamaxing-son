@@ -1,4 +1,4 @@
-## Shared enums for the poker hand model.
+## Shared enums by the different data classes
 class_name PokerEnums
 
 enum GameType { CASH_GAME, TOURNAMENT }
@@ -19,5 +19,4 @@ enum ActionType {
 	SHOWS,
 	MUCKS,
 	COLLECTED,
-	UNCALLED_RETURNED,
 }

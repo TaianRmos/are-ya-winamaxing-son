@@ -8,3 +8,8 @@ Simple desktop app tracking your Poker activity on Winamax. Using it might show 
 > **WORK IN PROGRESS**
 > 
 > Current state of the app: the parsing of the hands is done
+
+
+## TODO
+
+- [ ] Adding an enum of positions around the table and find which position the player is

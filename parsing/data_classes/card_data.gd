@@ -1,13 +1,15 @@
 ## Class representing a playing card
-## e.g. "Ah" -> rank 14 (Ace), suit HEARTS.
-class_name PokerCard
+## e.g. "Ad" -> rank 14 (Ace), suit DIAMONDS.
+class_name CardData
 extends RefCounted
+
 
 ## Rank of the card, from 2 to 14 with 11=J, 12=Q...
 var rank: int = 0
 
 ## Suit of the card
 var suit: PokerEnums.Suit
+
 
 const CHAR_TO_RANK: Dictionary[String, int] = {
 	"2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8,
@@ -33,9 +35,10 @@ const SUIT_TO_CHAR: Dictionary[PokerEnums.Suit, String] = {
 	PokerEnums.Suit.HEARTS: "h",
 }
 
-## Creates a PokerCard from a string
-static func from_string(card_str: String) -> PokerCard:
-	var card := PokerCard.new()
+
+## Creates a CardData from a string
+static func from_string(card_str: String) -> CardData:
+	var card := CardData.new()
 	var card_str_clean: String = card_str.strip_edges()
 	card.rank = CHAR_TO_RANK.get(card_str_clean.substr(0, 1), 0)
 	card.suit = CHAR_TO_SUIT.get(card_str_clean.substr(1, 1), -1)
@@ -46,6 +49,6 @@ static func from_string(card_str: String) -> PokerCard:
 	return card
 
 
-## Transform a PokerCard to the String version
+## Transform a CardData to the String version
 func _to_string() -> String:
 	return "%s%s" % [RANK_TO_CHAR.get(rank, "?"), SUIT_TO_CHAR.get(suit, "?")]
