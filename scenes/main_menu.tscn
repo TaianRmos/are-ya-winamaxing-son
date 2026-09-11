@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://cpksq4he7fcgw"]
+
+[ext_resource type="Script" uid="uid://bqtlgmx04ooqk" path="res://scenes/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="PackedScene" uid="uid://bvernu05qcm1j" path="res://scenes/debug.tscn" id="2_ekxnf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vue75"]
+font_size = 50
+
+[node name="MainMenu" type="Control" unique_id=1699018617]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l6cm7")
+debug_scene = ExtResource("2_ekxnf")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=81999947]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 400
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 400
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=909649040]
+layout_mode = 2
+
+[node name="MenuTitle" type="Label" parent="MarginContainer/VBoxContainer" unique_id=427653065]
+layout_mode = 2
+text = "Menu:"
+label_settings = SubResource("LabelSettings_vue75")
+horizontal_alignment = 1
+
+[node name="GoToDebug" type="Button" parent="MarginContainer/VBoxContainer" unique_id=595508545]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Debug Tool"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/GoToDebug" to="." method="_on_go_to_debug_pressed"]
