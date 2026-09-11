@@ -31,6 +31,10 @@ window/stretch/aspect="expand"
 
 enabled=PackedStringArray("res://addons/easy_charts/plugin.cfg")
 
+[gui]
+
+theme/custom="uid://bgdy6e34p1fdd"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
@@ -38,3 +42,4 @@ enabled=PackedStringArray("res://addons/easy_charts/plugin.cfg")
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+environment/defaults/default_clear_color=Color(0.14901961, 0.15294118, 0.1882353, 1)
