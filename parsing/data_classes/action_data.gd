@@ -15,6 +15,7 @@ var is_all_in: bool = false
 var cards: Array[CardData] = []
 var description: String = ""
 
+
 func _to_string() -> String:
 	match action_type:
 		PokerEnums.ActionType.POST_ANTE:

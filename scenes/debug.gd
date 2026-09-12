@@ -7,6 +7,7 @@ extends Control
 
 @onready var debug_summary_text_raw: TextEdit = $TabMargin/TabContainer/Summaries/TextMargin/TextSplit/DebugTextRaw
 @onready var debug_summary_text_parsed: TextEdit = $TabMargin/TabContainer/Summaries/TextMargin/TextSplit/DebugTextParsed
+@onready var stats_text: TextEdit = $TabMargin/TabContainer/Stats/TextMargin/StatsText
 
 @onready var account_selection_margin: MarginContainer = $AccountSelectionMargin
 @onready var tab_margin: MarginContainer = $TabMargin
@@ -24,6 +25,7 @@ var account_folders: Array[String] = []
 
 func _ready() -> void:
 	if Globals.accounts.size() == 1:
+		Globals.player_name = Globals.accounts[0]
 		_parse_data()
 	else:
 		_select_account()
@@ -31,12 +33,16 @@ func _ready() -> void:
 
 func _parse_data() -> void:
 	Globals.game_data = Parser.parse_data()
+	var total_profit: float = -2.0
 	for game in Globals.game_data:
+		total_profit += game.get_profits()
 		var button := Button.new()
 		button.text = game.name
 		button.add_theme_font_size_override("font_size", 32)
 		button.pressed.connect(_on_select_game_pressed.bind(game.name))
 		games_selection_container.add_child(button)
+	
+	print("Total profits: %s€" % total_profit)
 
 
 func _select_account() -> void:
@@ -74,13 +80,15 @@ func _on_select_game_pressed(game_name: String) -> void:
 	game_selection_margin.process_mode = Node.PROCESS_MODE_DISABLED
 	tab_margin.visible = true
 	tab_margin.process_mode = Node.PROCESS_MODE_INHERIT
-
+	
+	stats_text.text = str(selected_game)
 	_set_debug_round_text()
 	_set_debug_summary_text()
 
 
 func _on_account_button_pressed(account: String) -> void:
 	Globals.history_folder_path = Globals.history_folder_path.path_join(account).path_join("history")
+	Globals.player_name = account
 	_parse_data()
 	account_selection_margin.visible = false
 	account_selection_margin.process_mode = Node.PROCESS_MODE_DISABLED

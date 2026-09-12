@@ -3,6 +3,7 @@ extends RefCounted
 
 
 static var _regex_cache: Dictionary = {}
+static var _money_ticker: String = ""
 
 
 ## Compiles a regex and cache the pattern for more efficiency
@@ -17,11 +18,15 @@ static func to_float(s: String) -> float:
 	return s.replace(",", ".").replace("€", "").strip_edges().to_float()
 
 
+static func set_money_ticker(ticker: String) -> void:
+	_money_ticker = ticker
+
+
 ## Chips print as plain integers (e.g. "1000"), currency keeps 2 decimals (e.g. "0.20").
 static func format_amount(value: float) -> String:
 	if is_equal_approx(value, round(value)):
-		return "%d" % int(round(value))
-	return "%.2f" % value
+		return "%d%s" % [int(round(value)), _money_ticker]
+	return "%.2f%s" % [value, _money_ticker]
 
 
 ## Transforms an array of CardDatas into a string

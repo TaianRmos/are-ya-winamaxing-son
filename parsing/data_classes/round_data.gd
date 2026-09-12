@@ -32,9 +32,9 @@ var real_money: bool = false
 var button_seat: int = 0
 var players: Array[PlayerData] = []
 
-# Player who won the round
-var hero_name: String = ""
-var hero_cards: Array[CardData] = []
+# Should be the same as Globals.player_name, name of the selected account
+var main_player_name: String = ""
+var main_player_cards: Array[CardData] = []
 
 # Dictionary of StreetData for every action that happened during each street
 var streets: Dictionary[PokerEnums.Street, StreetData] = {}
@@ -64,9 +64,24 @@ func went_to_showdown() -> bool:
 	return streets.has(PokerEnums.Street.SHOWDOWN)
 
 
+func get_player_profit(player_name: String = Globals.player_name) -> float:
+	var profit = 0.0
+	for street in STREET_ORDER:
+		if streets.has(street):
+			profit += streets[street].get_player_profit(player_name)
+	
+	return profit
+
+
 func _to_string() -> String:
 	var lines: Array[String] = []
-	var game_label := "CashGame" if game_type == PokerEnums.GameType.CASH_GAME else "Tournament"
+	var game_label: String
+	if game_type == PokerEnums.GameType.CASH_GAME:
+		game_label = "CashGame"
+		ParsingHelper.set_money_ticker("€")
+	else:
+		game_label = "Tournament"
+		ParsingHelper.set_money_ticker("")
 	
 	lines.append("=== Round #%s (%s) ===" % [round_id, game_label])
 	
@@ -74,7 +89,7 @@ func _to_string() -> String:
 		var buy_in_str := "%s€ + %s€" % [ParsingHelper.format_amount(buy_in), ParsingHelper.format_amount(buy_in_rake)]
 		if buy_in_bounty > 0:
 			buy_in_str += " + %s€ bounty" % ParsingHelper.format_amount(buy_in_bounty)
-		lines.append("Tournament: \"%s\" | Buy-in: %s€ | Level: %d" % [tournament_name, buy_in_str, level])
+		lines.append("Tournament: \"%s\" | Buy-in: %s | Level: %d" % [tournament_name, buy_in_str, level])
 	
 	var blinds_str := "%s/%s" % [ParsingHelper.format_amount(small_blind), ParsingHelper.format_amount(big_blind)]
 	if ante > 0:
@@ -85,12 +100,12 @@ func _to_string() -> String:
 	lines.append("")
 	
 	lines.append("Players:")
-	for p in players:
-		lines.append("  %s" % str(p))
+	for player in players:
+		lines.append("  %s" % str(player))
 	lines.append("")
 	
-	if hero_name != "":
-		lines.append("Hero: %s [%s]" % [hero_name, ParsingHelper.cards_to_string(hero_cards)])
+	if main_player_name != "":
+		lines.append("You: %s [%s]" % [main_player_name, ParsingHelper.cards_to_string(main_player_cards)])
 		lines.append("")
 	
 	for street in STREET_ORDER:
@@ -105,8 +120,13 @@ func _to_string() -> String:
 	
 	if not showdown.is_empty():
 		lines.append("Summary:")
-		for r in showdown:
-			lines.append("  %s" % str(r))
+		for result in showdown:
+			lines.append("  %s" % str(result))
+		lines.append("")
+	
+	lines.append("Profits:")
+	for player in players:
+		lines.append("  %s: %s" % [player.name, ParsingHelper.format_amount(get_player_profit(player.name))])
 	
 	lines.append("=".repeat(40))
 	return "\n".join(lines)

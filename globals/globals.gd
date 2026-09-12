@@ -3,6 +3,7 @@ extends Node
 
 var history_folder_path: String
 var accounts: Array[String]
+var player_name: String
 var game_data: Array[GameData]
 
 

@@ -18,6 +18,8 @@ var addon_cost_rake: float = 0.0
 
 var your_rebuys: int = 0
 var your_addons: int = 0
+
+# Total amount of rebuys/addon by all players in the tournament
 var total_rebuys: int = 0
 var total_addons: int = 0
 
@@ -42,13 +44,26 @@ var won_bounty: float = 0.0
 
 var raw_text: String = ""
 
+
+## Returns the profit you made on that tournament
+func get_profit() -> float:
+	var profit: float = 0.0
+	var total_buy_in_cost: float = buy_in + buy_in_rake + buy_in_bounty
+	var total_rebuy_cost: float = rebuy_cost + rebuy_cost_rake
+	var total_addon_cost: float = addon_cost + addon_cost_rake
+	
+	var total_cost: float = total_buy_in_cost + (your_rebuys * total_rebuy_cost) + (your_addons * total_addon_cost)
+	profit = won_amount + won_bounty - total_cost
+	return profit
+
+
 func _to_string() -> String:
 	var lines: Array[String] = []
 	lines.append("=== Summary: %s (#%s) ===" % [tournament_name, tournament_id])
-	lines.append("Player: %s | Buy-in: %s€ + %s%s" % [
+	lines.append("Player: %s | Buy-in: %s€%s%s" % [
 		player_name,
 		ParsingHelper.format_amount(buy_in),
-		ParsingHelper.format_amount(buy_in_rake),
+		" + %s€ rake" % ParsingHelper.format_amount(buy_in_rake) if buy_in_rake > 0 else "",
 		" + %s€ bounty" % ParsingHelper.format_amount(buy_in_bounty) if buy_in_bounty > 0 else "",
 	])
 	lines.append("Mode: %s | Format: %s | Registered: %d%s" % [
@@ -67,4 +82,5 @@ func _to_string() -> String:
 			" + %s€ bounty" % ParsingHelper.format_amount(won_bounty) if won_bounty > 0 else "",
 		] if cashed else "",
 	])
+	lines.append("Profit: %s€" % ParsingHelper.format_amount(get_profit()))
 	return "\n".join(lines)

@@ -238,8 +238,8 @@ static func _parse_dealt_line(line: String, poker_round: RoundData) -> void:
 	if matches == null:
 		return
 	
-	poker_round.hero_name = matches.get_string(1)
-	poker_round.hero_cards = _parse_cards(matches.get_string(2))
+	poker_round.main_player_name = matches.get_string(1)
+	poker_round.main_player_cards = _parse_cards(matches.get_string(2))
 
 
 ## Parses the blinds and antes during the round
