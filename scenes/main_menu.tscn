@@ -1,8 +1,6 @@
 [gd_scene format=3 uid="uid://cpksq4he7fcgw"]
 
 [ext_resource type="Script" uid="uid://bqtlgmx04ooqk" path="res://scenes/main_menu.gd" id="1_l6cm7"]
-[ext_resource type="PackedScene" uid="uid://bvernu05qcm1j" path="res://scenes/debug.tscn" id="2_ekxnf"]
-[ext_resource type="PackedScene" uid="uid://crqgktanh6ig7" path="res://charts/area_chart.tscn" id="3_bqqt6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vue75"]
 font_size = 50
@@ -15,8 +13,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l6cm7")
-debug_scene = ExtResource("2_ekxnf")
-profit_chart = ExtResource("3_bqqt6")
+debug_scene_path = "res://scenes/debug.tscn"
+profit_chart_scene_path = "res://charts/area_chart.tscn"
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=81999947]
 layout_mode = 1

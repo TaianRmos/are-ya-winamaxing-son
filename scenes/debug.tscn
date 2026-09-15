@@ -2,9 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dj1qwn8vl0bc1" path="res://scenes/debug.gd" id="1_lgrwq"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_g4v7s"]
-font_size = 32
-
 [sub_resource type="LabelSettings" id="LabelSettings_yf5fn"]
 font_size = 32
 
@@ -16,27 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lgrwq")
-
-[node name="AccountSelectionMargin" type="MarginContainer" parent="." unique_id=926171321]
-process_mode = 4
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="AccountsContainer" type="VBoxContainer" parent="AccountSelectionMargin" unique_id=1790916401]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="Label" type="Label" parent="AccountSelectionMargin/AccountsContainer" unique_id=957459366]
-layout_mode = 2
-text = "Select your account:"
-label_settings = SubResource("LabelSettings_g4v7s")
-horizontal_alignment = 1
+main_menu_scene_path = "res://scenes/main_menu.tscn"
 
 [node name="TabMargin" type="MarginContainer" parent="." unique_id=755719603]
 process_mode = 4
@@ -221,7 +198,15 @@ text = "Select a game to look at:"
 label_settings = SubResource("LabelSettings_yf5fn")
 horizontal_alignment = 1
 
+[node name="GoToMainMenu" type="Button" parent="GameSelectionMargin" unique_id=871969657]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "Go back to main menu"
+
 [connection signal="text_submitted" from="TabMargin/TabContainer/Rounds/ButtonsMargin/VBoxContainer/RoundInput" to="." method="_on_round_input_text_submitted"]
 [connection signal="pressed" from="TabMargin/TabContainer/Rounds/ButtonsMargin/VBoxContainer/HBoxContainer/PreviousButton" to="." method="_on_previous_round_button_pressed"]
 [connection signal="pressed" from="TabMargin/TabContainer/Rounds/ButtonsMargin/VBoxContainer/HBoxContainer/NextButton" to="." method="_on_next_round_button_pressed"]
 [connection signal="pressed" from="TabMargin/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="GameSelectionMargin/GoToMainMenu" to="." method="_on_go_to_main_menu_pressed"]

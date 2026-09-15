@@ -12,6 +12,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ogid7")
+main_menu_scene_path = "res://scenes/main_menu.tscn"
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=932287152]
 layout_mode = 1
@@ -38,3 +39,12 @@ theme_override_constants/margin_bottom = 20
 [node name="Chart" parent="MarginContainer/MarginContainer" unique_id=1493155437 instance=ExtResource("1_ccccc")]
 layout_mode = 2
 theme = ExtResource("3_rlmw2")
+
+[node name="GoToMainMenu" type="Button" parent="MarginContainer" unique_id=12362042]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "Go back to main menu"
+
+[connection signal="pressed" from="MarginContainer/GoToMainMenu" to="." method="_on_go_to_main_menu_pressed"]

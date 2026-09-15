@@ -1,13 +1,13 @@
 extends Control
 
 
-@export var debug_scene: PackedScene
-@export var profit_chart: PackedScene
+@export_file_path("*.tscn") var debug_scene_path: String
+@export_file_path("*.tscn") var profit_chart_scene_path: String
 
 
 func _on_go_to_debug_pressed() -> void:
-	get_tree().change_scene_to_packed(debug_scene)
+	get_tree().change_scene_to_file(debug_scene_path)
 
 
 func _on_go_to_profits_pressed() -> void:
-	get_tree().change_scene_to_packed(profit_chart)
+	get_tree().change_scene_to_file(profit_chart_scene_path)

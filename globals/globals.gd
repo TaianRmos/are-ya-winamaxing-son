@@ -107,7 +107,7 @@ func _detect_history_folder() -> void:
 	if accounts_folder.size() == 1:
 		history_folder_path = accounts_path.path_join(accounts_folder[0]).path_join("history")
 		accounts = accounts_folder
-	elif accounts.size() > 1:
+	elif accounts_folder.size() > 1:
 		accounts = accounts_folder
 		history_folder_path = accounts_path
 	else:

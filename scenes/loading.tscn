@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://csr7j824cy8b8"]
+
+[ext_resource type="Script" uid="uid://crriqx0078to" path="res://scenes/loading.gd" id="1_ir5ef"]
+
+[node name="Loading" type="Control" unique_id=421109685]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ir5ef")
+main_menu_scene_path = "res://scenes/main_menu.tscn"
+
+[node name="LoadingContainer" type="CenterContainer" parent="." unique_id=1835040309]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LoadingContainer" unique_id=18513759]
+custom_minimum_size = Vector2(900, 110)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LoadingContainer/VBoxContainer" unique_id=754205636]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 48
+text = "Loading..."
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="LoadingContainer/VBoxContainer" unique_id=700839382]
+layout_mode = 2
+size_flags_vertical = 3
+show_percentage = false
+
+[node name="AccountSelectionContainer" type="MarginContainer" parent="." unique_id=1402163822]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 500
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 500
+theme_override_constants/margin_bottom = 200
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="AccountSelectionContainer" unique_id=813649871]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="AccountSelectionContainer/ButtonsContainer" unique_id=1451034383]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 48
+text = "Select an account:"
+horizontal_alignment = 1
+vertical_alignment = 1

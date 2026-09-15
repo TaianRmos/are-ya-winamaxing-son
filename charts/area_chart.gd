@@ -1,6 +1,8 @@
 extends Control
 
 
+@export_file_path("*.tscn") var main_menu_scene_path: String
+
 @onready var chart: Chart = $MarginContainer/MarginContainer/Chart
 
 
@@ -40,3 +42,7 @@ func draw_chart() -> void:
 	props.draw_origin = true
 	
 	chart.plot([profit_function], props)
+
+
+func _on_go_to_main_menu_pressed() -> void:
+	get_tree().change_scene_to_file(main_menu_scene_path)
