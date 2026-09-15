@@ -24,25 +24,21 @@ var account_folders: Array[String] = []
 
 
 func _ready() -> void:
-	if Globals.accounts.size() == 1:
-		Globals.player_name = Globals.accounts[0]
-		_parse_data()
-	else:
+	if Globals.was_parsed:
+		_create_game_selection()
+	elif Globals.accounts.size() != 1:
 		_select_account()
+	
+	Globals.parsing_finished.connect(_create_game_selection)
 
 
-func _parse_data() -> void:
-	Globals.game_data = Parser.parse_data()
-	var total_profit: float = -2.0
+func _create_game_selection() -> void:
 	for game in Globals.game_data:
-		total_profit += game.get_profits()
 		var button := Button.new()
 		button.text = game.name
 		button.add_theme_font_size_override("font_size", 32)
 		button.pressed.connect(_on_select_game_pressed.bind(game.name))
 		games_selection_container.add_child(button)
-	
-	print("Total profits: %s€" % total_profit)
 
 
 func _select_account() -> void:
@@ -87,9 +83,8 @@ func _on_select_game_pressed(game_name: String) -> void:
 
 
 func _on_account_button_pressed(account: String) -> void:
-	Globals.history_folder_path = Globals.history_folder_path.path_join(account).path_join("history")
-	Globals.player_name = account
-	_parse_data()
+	Globals.select_account(account)
+	await Globals.parsing_finished
 	account_selection_margin.visible = false
 	account_selection_margin.process_mode = Node.PROCESS_MODE_DISABLED
 	tab_margin.visible = true
