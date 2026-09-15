@@ -20,7 +20,7 @@ func _ready() -> void:
 	# If the loading is too fast, we need to call the 
 	# method manually because the signal fired before
 	# we had the time to connect to it
-	if Globals.get_percentage_parsed() == 100:
+	if Globals.get_percentage_parsed() == 100 and Globals.accounts.size() == 1:
 		call_deferred("_on_parsing_finished")
 
 
