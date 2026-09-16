@@ -3,7 +3,7 @@ class_name AreaPlotter
 
 var base_color: Color = Color.WHITE
 
-func _init(chart: Chart, function: Function) -> void:
+func _init(chart: ChartAddOn, function: Function) -> void:
 	super(chart, function)
 	self.base_color = function.get_color()
 

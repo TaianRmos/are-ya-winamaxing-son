@@ -3,7 +3,7 @@ extends Control
 
 @export_file_path("*.tscn") var main_menu_scene_path: String
 
-@onready var chart: Chart = $MarginContainer/MarginContainer/Chart
+@onready var chart: ChartAddOn = $MarginContainer/MarginContainer/Chart
 
 
 func _ready() -> void:

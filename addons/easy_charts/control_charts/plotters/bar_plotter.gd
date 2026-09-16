@@ -9,7 +9,7 @@ var _bar_size: float
 var _bars_rects: Array
 var _focused_bar_midpoint: Point
 
-func _init(chart: Chart, function: Function):
+func _init(chart: ChartAddOn, function: Function):
 	super(chart, function)
 	_bar_size = function.props.get("bar_size", 5.0) as float
 

@@ -1,6 +1,6 @@
 extends Control
 
-@onready var chart: Chart = $VBoxContainer/Chart
+@onready var chart: ChartAddOn = $VBoxContainer/Chart
 
 func _ready() -> void:
 	var skills: Array = [

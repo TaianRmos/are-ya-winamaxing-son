@@ -3,7 +3,7 @@
 extends Control
 
 @onready var chart_scn: PackedScene = load("res://addons/easy_charts/control_charts/chart.tscn")
-var chart: Chart
+var chart: ChartAddOn
 
 # This Chart will plot 1 function
 var f1: Function

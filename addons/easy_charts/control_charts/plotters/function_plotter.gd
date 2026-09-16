@@ -2,12 +2,12 @@ extends Control
 class_name FunctionPlotter
 
 var function: Function
-var chart: Chart
+var chart: ChartAddOn
 
 var x_domain: ChartAxisDomain
 var y_domain: ChartAxisDomain
 
-static func create_for_function(chart: Chart, function: Function) -> FunctionPlotter:
+static func create_for_function(chart: ChartAddOn, function: Function) -> FunctionPlotter:
 	match function.get_type():
 		Function.Type.LINE:
 			return LinePlotter.new(chart, function)
@@ -22,7 +22,7 @@ static func create_for_function(chart: Chart, function: Function) -> FunctionPlo
 		Function.Type.SCATTER, _:
 			return ScatterPlotter.new(chart, function)
 
-func _init(chart: Chart, function: Function) -> void:
+func _init(chart: ChartAddOn, function: Function) -> void:
 	self.chart = chart
 	self.function = function
 

@@ -1,6 +1,6 @@
 @icon("res://addons/easy_charts/utilities/icons/linechart.svg")
 extends PanelContainer
-class_name Chart
+class_name ChartAddOn
 
 @onready var _canvas: Canvas = $Canvas
 @onready var plot_box: PlotBox = %PlotBox

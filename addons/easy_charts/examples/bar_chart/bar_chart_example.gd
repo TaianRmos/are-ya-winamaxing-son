@@ -1,6 +1,6 @@
 extends Control
 
-@onready var chart: Chart = $VBoxContainer/Chart
+@onready var chart: ChartAddOn = $VBoxContainer/Chart
 
 var functions: Array[Function]
 var selected_functions: Array[Function]

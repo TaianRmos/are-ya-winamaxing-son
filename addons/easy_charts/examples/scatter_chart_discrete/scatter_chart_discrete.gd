@@ -1,6 +1,6 @@
 extends Control
 
-@onready var chart: Chart = $VBoxContainer/Chart
+@onready var chart: ChartAddOn = $VBoxContainer/Chart
 
 @export var blackbird_icon: Texture2D
 @export var nightingale_icon: Texture2D

@@ -4,7 +4,7 @@ extends Panel
 @onready var _theme_options_button: OptionButton = %ThemeOptionButton
 
 var _chart_scene := preload("res://addons/easy_charts/control_charts/chart.tscn")
-var _chart: Chart
+var _chart: ChartAddOn
 var _chart_properties: ChartProperties
 
 func _ready() -> void:

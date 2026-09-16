@@ -13,7 +13,7 @@ var _point_size: float
 var _x_sampled_domain: ChartAxisDomain
 var _y_sampled_domain: ChartAxisDomain
 
-func _init(chart: Chart, function: Function):
+func _init(chart: ChartAddOn, function: Function):
 	super(chart, function)
 	_point_size = function.props.get("point_size", 3.0)
 

@@ -1,6 +1,6 @@
 extends Control
 
-@onready var chart: Chart = $VBoxContainer/Chart
+@onready var chart: ChartAddOn = $VBoxContainer/Chart
 
 # This Chart will plot 3 different functions
 var f1: Function

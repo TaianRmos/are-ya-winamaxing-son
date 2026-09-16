@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://b2oxy2brcj40e"]
+
+[ext_resource type="Script" uid="uid://d3s81ihyuiiiw" path="res://chart_lib/chart.gd" id="1_frxxp"]
+[ext_resource type="FontFile" uid="uid://32fooufdc6m0" path="res://assets/fonts/SourceSans3-Regular.ttf" id="2_w22t2"]
+[ext_resource type="Script" uid="uid://dw8kgsvp18j4b" path="res://chart_lib/grid_chart.gd" id="2_ygff7"]
+
+[node name="Chart" type="Control" unique_id=775673171]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_frxxp")
+font = ExtResource("2_w22t2")
+
+[node name="Panel" type="Panel" parent="." unique_id=1470671275]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1768557943]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 60
+
+[node name="GridChart" type="Control" parent="MarginContainer" unique_id=721152569]
+layout_mode = 2
+script = ExtResource("2_ygff7")
