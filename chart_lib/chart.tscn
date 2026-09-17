@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://32fooufdc6m0" path="res://assets/fonts/SourceSans3-Regular.ttf" id="2_w22t2"]
 [ext_resource type="Script" uid="uid://dw8kgsvp18j4b" path="res://chart_lib/grid_chart.gd" id="2_ygff7"]
 [ext_resource type="Script" uid="uid://vm8dsdlmao5a" path="res://chart_lib/scatter_chart.gd" id="4_w22t2"]
+[ext_resource type="Script" uid="uid://csdvlxliq3o4d" path="res://chart_lib/line_chart.gd" id="5_3pwww"]
 
 [node name="Chart" type="Control" unique_id=775673171]
 layout_mode = 3
@@ -13,10 +14,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_frxxp")
-auto_set_x_axis = false
-x_axis_mode = 2
 auto_set_y_axis = false
-y_axis_mode = 2
+y_axis_mode = 1
 font = ExtResource("2_w22t2")
 
 [node name="Panel" type="Panel" parent="." unique_id=1470671275]
@@ -42,6 +41,10 @@ theme_override_constants/margin_bottom = 60
 [node name="GridChart" type="Control" parent="MarginContainer" unique_id=721152569]
 layout_mode = 2
 script = ExtResource("2_ygff7")
+
+[node name="LineChart" type="Control" parent="MarginContainer" unique_id=416858306]
+layout_mode = 2
+script = ExtResource("5_3pwww")
 
 [node name="ScatterChart" type="Control" parent="MarginContainer" unique_id=115996695]
 layout_mode = 2

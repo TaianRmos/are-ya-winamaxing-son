@@ -15,6 +15,7 @@ grow_vertical = 2
 script = ExtResource("1_l6cm7")
 debug_scene_path = "res://scenes/debug.tscn"
 profit_chart_scene_path = "res://charts/area_chart.tscn"
+new_chart_scene_path = "res://chart_lib/chart.tscn"
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=81999947]
 layout_mode = 1
@@ -48,5 +49,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Profits Chart"
 
+[node name="GoToNewChart" type="Button" parent="MarginContainer/VBoxContainer" unique_id=191949312]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "New Chart"
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/GoToDebug" to="." method="_on_go_to_debug_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/GoToProfits" to="." method="_on_go_to_profits_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/GoToNewChart" to="." method="_on_go_to_new_chart_pressed"]

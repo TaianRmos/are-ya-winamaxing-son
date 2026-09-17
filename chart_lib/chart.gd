@@ -29,12 +29,21 @@ extends Control
 @export_range(1, 100, 1, "or_greater", "suffix:px") var font_size: int = 12
 
 
-var data_x: Array[float] = [50, 50, -50, -50]
-var data_y: Array[float] = [50, -50, 50, -50]
-var data: Array = []
+var data_x: Array[float]
+var data_y: Array[float]
+var data: Array[Vector2] = []
 
 
 func _ready() -> void:
+	data_y = [0.0]
+	data_x = [0.0]
+	var cumulation: float = 0.0
+	
+	for i in range(Globals.game_data.size()):
+		cumulation += Globals.game_data[i].get_profits()
+		data_y.append(cumulation)
+		data_x.append(i+1)
+	
 	if data_x.size() != data_y.size():
 		push_error("X and Y axis have not the same amount of values.")
 	
@@ -97,10 +106,6 @@ func _ready() -> void:
 			var offset = abs(max_distance - y_center_point) * 0.05
 			y_min = y_center_point - max_distance - offset
 			y_max = y_center_point + max_distance + offset
-	
-	print("X axis: %s to %s" % [x_min, x_max])
-	print("Y axis: %s to %s" % [y_min, y_max])
-
 
 
 func point_to_pixel_coordinates(p: Vector2, node_size: Vector2) -> Vector2:
