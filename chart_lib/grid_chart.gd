@@ -1,14 +1,14 @@
-class_name GridChart
+class_name GridChartTemp
 extends Control
 
 
-var chart: Chart
+var chart: ChartTemp
 var grid_offset: int = 10
 var label_offset := Vector2i(15, 20)
 
 
 func _ready() -> void:
-	chart = get_parent().get_parent() as Chart
+	chart = get_parent().get_parent() as ChartTemp
 
 
 func _draw() -> void:

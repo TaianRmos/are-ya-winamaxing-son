@@ -1,12 +1,12 @@
-class_name ScatterChart
+class_name ScatterChartTemp
 extends Control
 
 
-var chart: Chart
+var chart: ChartTemp
 
 
 func _ready() -> void:
-	chart = get_parent().get_parent() as Chart
+	chart = get_parent().get_parent() as ChartTemp
 
 
 func _draw() -> void:

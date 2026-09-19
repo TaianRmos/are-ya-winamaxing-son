@@ -1,12 +1,12 @@
-class_name ChartFunction
+class_name ChartFunctionTemp
 extends Control
 
 
-var chart: Chart
+var chart: ChartTemp
 
 
 func _ready() -> void:
-	chart = get_parent().get_parent() as Chart
+	chart = get_parent().get_parent() as ChartTemp
 	var cumulative_profits: Array[float] = [0.0]
 	var x_axis: Array[float] = [0]
 	var cumulation: float = 0.0

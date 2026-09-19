@@ -1,4 +1,4 @@
-class_name Chart
+class_name ChartTemp
 extends Control
 
 
