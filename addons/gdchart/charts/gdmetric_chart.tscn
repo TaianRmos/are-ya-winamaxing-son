@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bengfcx86fv74"]
+
+[ext_resource type="Script" uid="uid://dqxvv2s2wctih" path="res://addons/gdchart/scripts/gdmetric_chart.gd" id="1_5d1es"]
+
+[node name="GdMetricChart" type="Control" unique_id=67011895]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5d1es")
+title = "Metric:"

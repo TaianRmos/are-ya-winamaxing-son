@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://8j1nkdx8bd7j"]
+
+[ext_resource type="Script" uid="uid://xu7j31utq6t4" path="res://addons/gdchart/scripts/gdscatter_chart.gd" id="1_vqdr2"]
+
+[node name="GDScatterChart" type="Control" unique_id=44663430]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vqdr2")
+y_sections = 4

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://by3g83f3hgun4"]
+
+[ext_resource type="Script" uid="uid://b0bkn81kj8pcg" path="res://addons/gdchart/scripts/gdline_chart.gd" id="1_pet8d"]
+
+[node name="GDLineChart" type="Control" unique_id=1943326559]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pet8d")
+metadata/_custom_type_script = "uid://xu7j31utq6t4"

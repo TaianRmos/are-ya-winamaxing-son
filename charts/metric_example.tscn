@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://j5bioup737sm"]
+
+[ext_resource type="Script" uid="uid://rryycfj7yo82" path="res://charts/metric_example.gd" id="1_37fti"]
+[ext_resource type="Script" uid="uid://dqxvv2s2wctih" path="res://addons/gdchart/scripts/gdmetric_chart.gd" id="1_yv2nt"]
+[ext_resource type="Script" uid="uid://bhsi3unrsm288" path="res://charts/functions/games_played_function.gd" id="2_d76sh"]
+[ext_resource type="Script" uid="uid://dfjs3oq8xp0p" path="res://charts/functions/hands_played_function.gd" id="3_osuye"]
+[ext_resource type="Script" uid="uid://cwta6k5k5qy2f" path="res://charts/functions/profit_function.gd" id="4_qgqr4"]
+[ext_resource type="Script" uid="uid://q5w3lfhq43nk" path="res://charts/functions/function_funny_number.gd" id="5_qgqr4"]
+
+[node name="MetricExample" type="Control" unique_id=2063245796]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_37fti")
+main_menu_scene_path = "res://scenes/main_menu.tscn"
+
+[node name="MarginPanel" type="MarginContainer" parent="." unique_id=1510839021]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Panel" type="Panel" parent="MarginPanel" unique_id=2145530753]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=864352409]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 60
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer" unique_id=189052080]
+layout_mode = 2
+theme_override_constants/h_separation = 40
+theme_override_constants/v_separation = 40
+columns = 2
+
+[node name="GDMetricChart" type="Control" parent="MarginContainer/GridContainer" unique_id=1384050145]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_yv2nt")
+title = "Games Played"
+metadata/_custom_type_script = "uid://dqxvv2s2wctih"
+
+[node name="Function" type="Node" parent="MarginContainer/GridContainer/GDMetricChart" unique_id=1407455993]
+script = ExtResource("2_d76sh")
+metadata/_custom_type_script = "uid://lckv6aui3xwv"
+
+[node name="GDMetricChart2" type="Control" parent="MarginContainer/GridContainer" unique_id=318031780]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_yv2nt")
+title = "Hands Played"
+metadata/_custom_type_script = "uid://dqxvv2s2wctih"
+
+[node name="Function" type="Node" parent="MarginContainer/GridContainer/GDMetricChart2" unique_id=1999725045]
+script = ExtResource("3_osuye")
+metadata/_custom_type_script = "uid://lckv6aui3xwv"
+
+[node name="GDMetricChart3" type="Control" parent="MarginContainer/GridContainer" unique_id=1115262929]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_yv2nt")
+title = "Total Profits"
+metadata/_custom_type_script = "uid://dqxvv2s2wctih"
+
+[node name="ProfitFunction" type="Node" parent="MarginContainer/GridContainer/GDMetricChart3" unique_id=341385206]
+script = ExtResource("4_qgqr4")
+metadata/_custom_type_script = "uid://cwta6k5k5qy2f"
+
+[node name="GDMetricChart4" type="Control" parent="MarginContainer/GridContainer" unique_id=1497060033]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_yv2nt")
+title = "Funny Number"
+metadata/_custom_type_script = "uid://dqxvv2s2wctih"
+
+[node name="Function" type="Node" parent="MarginContainer/GridContainer/GDMetricChart4" unique_id=957781285]
+script = ExtResource("5_qgqr4")
+metadata/_custom_type_script = "uid://lckv6aui3xwv"
+
+[node name="ButtonMargin" type="MarginContainer" parent="." unique_id=500410388]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Button" type="Button" parent="ButtonMargin" unique_id=1909851228]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Back"
+
+[connection signal="pressed" from="ButtonMargin/Button" to="." method="_on_button_pressed"]
