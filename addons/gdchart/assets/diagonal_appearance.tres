@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://snd8yeengcg4"]
+
+[ext_resource type="Shader" uid="uid://bo6sfmmpbspqp" path="res://addons/gdchart/assets/diagonal_appearance.gdshader" id="1_buvt1"]
+
+[resource]
+shader = ExtResource("1_buvt1")
+shader_parameter/progress = 0.0

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://do8ujcxr45jp6"]
+
+[ext_resource type="Script" uid="uid://d2nbim0llndc8" path="res://color_rect.gd" id="1_h40d6"]
+[ext_resource type="Shader" uid="uid://cgl5iivxu3q66" path="res://addons/gdchart/assets/swipe_appearance.gdshader" id="1_ka5y7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nrx1g"]
+shader = ExtResource("1_ka5y7")
+shader_parameter/progress = 0.0
+shader_parameter/rect_size = Vector2(1, 1)
+
+[node name="ColorRect" type="Control" unique_id=722138050]
+material = SubResource("ShaderMaterial_nrx1g")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h40d6")

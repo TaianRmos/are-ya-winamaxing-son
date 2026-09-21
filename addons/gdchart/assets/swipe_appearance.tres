@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://desrifvaetdw"]
+
+[ext_resource type="Shader" uid="uid://cgl5iivxu3q66" path="res://addons/gdchart/assets/swipe_appearance.gdshader" id="1_n7c0i"]
+
+[resource]
+shader = ExtResource("1_n7c0i")
+shader_parameter/progress = 0.0
+shader_parameter/rect_size = Vector2(1, 1)

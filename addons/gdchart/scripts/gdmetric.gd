@@ -12,7 +12,7 @@ func _format_metric(value: float) -> String:
 
 
 func _draw() -> void:
-	var metric: String = _format_metric(chart.metric)
+	var metric: String = _format_metric(chart.metric) + chart.unit
 	chart.refit(size)
 	
 	var font := chart.get_font()

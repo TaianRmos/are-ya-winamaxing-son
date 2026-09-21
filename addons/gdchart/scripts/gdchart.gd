@@ -3,6 +3,8 @@ class_name GDChart
 extends Control
 
 
+enum AxisMode { ANCHORED, CENTERED }
+
 var function: Function
 
 

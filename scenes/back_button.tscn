@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://kd8ck65m8n4x"]
+
+[ext_resource type="Script" uid="uid://blyy8vh7e3tu2" path="res://scenes/back_button.gd" id="1_mki26"]
+
+[node name="BackButton" type="Button" unique_id=611880761]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -32.0
+offset_bottom = 16.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = "Back"
+script = ExtResource("1_mki26")
+main_menu_scene_path = "res://scenes/main_menu.tscn"
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

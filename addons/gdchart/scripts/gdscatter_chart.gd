@@ -5,6 +5,8 @@ extends GDChart
 
 const GDGrid := preload("res://addons/gdchart/scripts/gdgrid.gd")
 const GDScatter := preload("res://addons/gdchart/scripts/gdscatter.gd")
+const diagonal_shader: ShaderMaterial = preload("res://addons/gdchart/assets/diagonal_appearance.tres")
+const swipe_shader: ShaderMaterial = preload("res://addons/gdchart/assets/swipe_appearance.tres")
 
 
 @export_subgroup("X Axis")
@@ -12,14 +14,14 @@ const GDScatter := preload("res://addons/gdchart/scripts/gdscatter.gd")
 	set(v): auto_set_x_axis = v; _request_update()
 @export var round_x_axis_values: bool = true:
 	set(v): round_x_axis_values = v; _request_update()
+@export var add_x_axis_margin: bool = true:
+	set(v): add_x_axis_margin = v; _request_update()
 @export var x_min: float = 0.0:
 	set(v): x_min = v; _request_update()
 @export var x_max: float = 100.0:
 	set(v): x_max = v; _request_update()
-@export var x_axis_mode: ChartUtils.AxisMode = ChartUtils.AxisMode.ANCHORED:
+@export var x_axis_mode: GDChart.AxisMode = GDChart.AxisMode.ANCHORED:
 	set(v): x_axis_mode = v; _request_update()
-@export var x_anchor_point: float = 0.0:
-	set(v): x_anchor_point = v; _request_update()
 @export var x_center_point: float = 0.0:
 	set(v): x_center_point = v; _request_update()
 @export_range(0, 100, 1, "or_greater") var x_sections: int = 4:
@@ -30,16 +32,14 @@ const GDScatter := preload("res://addons/gdchart/scripts/gdscatter.gd")
 	set(v): auto_set_y_axis = v; _request_update()
 @export var round_y_axis_values: bool = true:
 	set(v): round_y_axis_values = v; _request_update()
+@export var add_y_axis_margin: bool = true:
+	set(v): add_y_axis_margin = v; _request_update()
 @export var y_min: float = 0.0:
 	set(v): y_min = v; _request_update()
 @export var y_max: float = 100.0:
 	set(v): y_max = v; _request_update()
-@export var y_axis_mode: ChartUtils.AxisMode = ChartUtils.AxisMode.CENTERED:
+@export var y_axis_mode: GDChart.AxisMode = GDChart.AxisMode.CENTERED:
 	set(v): y_axis_mode = v; _request_update()
-@export var y_anchor_position: ChartUtils.AnchorPosition = ChartUtils.AnchorPosition.BOTTOM:
-	set(v): y_anchor_position = v; _request_update()
-@export var y_anchor_point: float = 0.0:
-	set(v): y_anchor_point = v; _request_update()
 @export var y_center_point: float = 0.0:
 	set(v): y_center_point = v; _request_update()
 @export_range(0, 100, 1, "or_greater") var y_sections: int = 3:
@@ -58,6 +58,9 @@ var _x_min: float
 var _x_max: float
 var _y_min: float
 var _y_max: float
+
+var panel: Panel
+var margin_container: MarginContainer
 
 
 func _ready() -> void:
@@ -86,11 +89,11 @@ func _update() -> void:
 
 
 func _create_nodes() -> void:
-	var panel := Panel.new()
+	panel = Panel.new()
 	panel.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(panel)
 	
-	var margin_container := MarginContainer.new()
+	margin_container = MarginContainer.new()
 	margin_container.set_anchors_preset(Control.PRESET_FULL_RECT)
 	margin_container.add_theme_constant_override("margin_left", 60)
 	margin_container.add_theme_constant_override("margin_right", 60)
@@ -99,18 +102,22 @@ func _create_nodes() -> void:
 	
 	var grid: GDGrid = GDGrid.new()
 	grid.set_anchors_preset(Control.PRESET_FULL_RECT)
+	if not Engine.is_editor_hint():
+		grid.material = diagonal_shader.duplicate()
 	margin_container.add_child(grid)
 	
 	var scatter: GDScatter = GDScatter.new()
 	scatter.set_anchors_preset(Control.PRESET_FULL_RECT)
+	if not Engine.is_editor_hint():
+		scatter.material = swipe_shader.duplicate()
 	margin_container.add_child(scatter)
 	
 	add_child(margin_container)
 
 
 func _destroy_nodes() -> void:
-	for node in get_children():
-		node.queue_free()
+	panel.queue_free()
+	margin_container.queue_free()
 
 
 func set_axis() -> void:
@@ -126,53 +133,50 @@ func set_axis() -> void:
 	
 	# Finding best x axis parameters automatically
 	if auto_set_x_axis:
-		var offset = abs(max_data_x - min_data_x) * 0.05
-		_x_max = max_data_x + offset
-		if x_axis_mode == ChartUtils.AxisMode.ANCHORED:
-			_x_min = min_data_x
-		else:
+		if x_axis_mode == GDChart.AxisMode.ANCHORED:
+			var offset = abs(max_data_x - min_data_x) * 0.05 if add_x_axis_margin else 0
+			_x_max = max_data_x + offset
 			_x_min = min_data_x - offset
+		elif x_axis_mode == GDChart.AxisMode.CENTERED:
+			var max_distance = max(abs(x_center_point - max_data_x), abs(x_center_point - min_data_x))
+			var offset = max_distance * 2 * 0.05 if add_x_axis_margin else 0
+			_x_min = x_center_point - max_distance - offset
+			_x_max = x_center_point + max_distance + offset
 	
 	# Using the user's choice for the x axis
 	else:
-		if x_axis_mode == ChartUtils.AxisMode.ANCHORED:
-			var offset = abs(max_data_x - x_anchor_point) * 0.05
-			_x_min = x_anchor_point
-			_x_max = max_data_x + offset
-		elif x_axis_mode == ChartUtils.AxisMode.CENTERED:
-			var max_distance = max(abs(x_center_point - max_data_x), abs(x_center_point - min_data_x))
-			var offset = abs(max_distance - x_center_point) * 0.05
+		if x_axis_mode == GDChart.AxisMode.ANCHORED:
+			var offset = abs(x_max - x_min) * 0.05 if add_x_axis_margin else 0
+			_x_min = x_min - offset
+			_x_max = x_max + offset
+		elif x_axis_mode == GDChart.AxisMode.CENTERED:
+			var max_distance = max(abs(x_center_point - x_max), abs(x_center_point - x_min))
+			var offset = max_distance * 2 * 0.05
 			_x_min = x_center_point - max_distance - offset
 			_x_max = x_center_point + max_distance + offset
 	
 	# Finding best x axis parameters automatically
 	if auto_set_y_axis:
-		var offset = abs(max_data_y - min_data_y) * 0.05
-		if y_axis_mode == ChartUtils.AxisMode.ANCHORED and y_anchor_position == ChartUtils.AnchorPosition.TOP:
-			_y_max = max_data_y
-		else:
+		if y_axis_mode == GDChart.AxisMode.ANCHORED:
+			var offset = abs(max_data_y - min_data_y) * 0.05 if add_y_axis_margin else 0
 			_y_max = max_data_y + offset
-		
-		if y_axis_mode == ChartUtils.AxisMode.ANCHORED and y_anchor_position == ChartUtils.AnchorPosition.BOTTOM:
-			_y_min = min_data_y
-		else:
 			_y_min = min_data_y - offset
+		elif y_axis_mode == GDChart.AxisMode.CENTERED:
+			var max_distance = max(abs(y_center_point - max_data_y), abs(y_center_point - min_data_y))
+			var offset = max_distance * 2 * 0.05 if add_y_axis_margin else 0
+			_y_min = y_center_point - max_distance - offset
+			_y_max = y_center_point + max_distance + offset
 	
 	# Using the user's choice for the y axis
 	else:
-		if y_axis_mode == ChartUtils.AxisMode.ANCHORED:
-			if y_anchor_position == ChartUtils.AnchorPosition.BOTTOM:
-				var offset = abs(max_data_y - y_anchor_point) * 0.05
-				_y_min = y_anchor_point
-				_y_max = max_data_y + offset
-			else:
-				var offset = abs(max_data_y - y_anchor_point) * 0.05
-				_y_min = min_data_y - offset
-				_y_max = y_anchor_point
+		if y_axis_mode == GDChart.AxisMode.ANCHORED:
+			var offset = abs(y_max - y_min) * 0.05 if add_y_axis_margin else 0
+			_y_min = y_min - offset
+			_y_max = y_max + offset
 		
-		elif y_axis_mode == ChartUtils.AxisMode.CENTERED:
-			var max_distance = max(abs(y_center_point - max_data_y), abs(y_center_point - min_data_y))
-			var offset = abs(max_distance - y_center_point) * 0.05
+		elif y_axis_mode == GDChart.AxisMode.CENTERED:
+			var max_distance = max(abs(y_center_point - y_max), abs(y_center_point - y_min))
+			var offset = max_distance * 2 * 0.05
 			_y_min = y_center_point - max_distance - offset
 			_y_max = y_center_point + max_distance + offset
 	

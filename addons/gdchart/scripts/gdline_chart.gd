@@ -20,14 +20,20 @@ func _create_nodes() -> void:
 	
 	var grid: GDGrid = GDGrid.new()
 	grid.set_anchors_preset(Control.PRESET_FULL_RECT)
+	if not Engine.is_editor_hint():
+		grid.material = diagonal_shader.duplicate()
 	margin_container.add_child(grid)
 	
 	var line: GDLine = GDLine.new()
 	line.set_anchors_preset(Control.PRESET_FULL_RECT)
+	if not Engine.is_editor_hint():
+		line.material = swipe_shader.duplicate()
 	margin_container.add_child(line)
 	
 	var scatter: GDScatter = GDScatter.new()
 	scatter.set_anchors_preset(Control.PRESET_FULL_RECT)
+	if not Engine.is_editor_hint():
+		scatter.material = swipe_shader.duplicate()
 	margin_container.add_child(scatter)
 	
 	add_child(margin_container)

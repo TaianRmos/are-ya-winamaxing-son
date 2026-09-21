@@ -4,10 +4,20 @@ extends Control
 var chart: GDScatterChart
 var grid_offset: int = 10
 var label_offset := Vector2i(15, 20)
+var animation_time := 1.0
 
 
 func _ready() -> void:
 	chart = get_parent().get_parent() as GDScatterChart
+	if not Engine.is_editor_hint():
+		material.set_shader_parameter("rect_size", size)
+		resized.connect(func(): material.set_shader_parameter("rect_size", size))
+		_appear()
+
+
+func _appear() -> void:
+	var tw: Tween = create_tween()
+	tw.tween_property(material, "shader_parameter/progress", 1.0, animation_time)
 
 
 func _draw() -> void:
@@ -17,7 +27,7 @@ func _draw() -> void:
 	var y_grid_step: float = y_axis_size / chart.y_sections
 	
 	# Drawing the X sections when centered
-	if not chart.auto_set_x_axis and chart.x_axis_mode == ChartUtils.AxisMode.CENTERED:
+	if chart.x_axis_mode == GDChart.AxisMode.CENTERED:
 		draw_x_line(chart.x_center_point)
 		var sections_to_draw: int = ceil(chart.x_sections / 2.0) - (chart.x_sections % 2)
 		for section_index in range(1, sections_to_draw + 1):
@@ -31,18 +41,12 @@ func _draw() -> void:
 	
 	
 	# Drawing the Y sections when centered
-	if not chart.auto_set_y_axis and chart.y_axis_mode == ChartUtils.AxisMode.CENTERED:
+	if chart.y_axis_mode == GDChart.AxisMode.CENTERED:
 		draw_y_line(chart.y_center_point)
 		var sections_to_draw: int = ceil(chart.y_sections / 2.0) - (chart.y_sections % 2)
 		for section_index in range(1, sections_to_draw + 1):
 			draw_y_line(chart.y_center_point + y_grid_step * section_index)
 			draw_y_line(chart.y_center_point - y_grid_step * section_index)
-	
-	# Drawing the Y sections from top to bottom when it's necessary
-	elif not chart.auto_set_y_axis and chart.y_axis_mode == ChartUtils.AxisMode.ANCHORED \
-		 and chart.y_anchor_position == ChartUtils.AnchorPosition.TOP:
-		for section_index in range(chart.y_sections + 1):
-			draw_y_line(chart._y_max - y_grid_step * section_index)
 	
 	# Drawing the Y sections in the regular case
 	else:

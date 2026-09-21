@@ -8,6 +8,8 @@ const GDMetricTitle = preload("res://addons/gdchart/scripts/gdmetric_title.gd")
 
 @export var title: String = "Metric":
 	set(v): title = v; _request_update()
+@export var unit: String = "":
+	set(v): unit = v; _request_update()
 @export var font: Font:
 	set(v): font = v; _request_update()
 @export var color := Color.WHITE:
@@ -22,6 +24,9 @@ var font_size := 16
 var metric_node: GDMetric
 var metric: float
 var _update_queued: bool = false
+
+var panel: Panel
+var margin_container: MarginContainer
 
 
 func _ready() -> void:
@@ -48,11 +53,11 @@ func _update() -> void:
 
 
 func _create_nodes() -> void:
-	var panel := Panel.new()
+	panel = Panel.new()
 	panel.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(panel)
 	
-	var margin_container := MarginContainer.new()
+	margin_container = MarginContainer.new()
 	margin_container.set_anchors_preset(Control.PRESET_FULL_RECT)
 	margin_container.add_theme_constant_override("margin_left", 60)
 	margin_container.add_theme_constant_override("margin_right", 60)
@@ -80,8 +85,8 @@ func _create_nodes() -> void:
 
 
 func _destroy_nodes() -> void:
-	for node in get_children():
-		node.queue_free()
+	panel.queue_free()
+	margin_container.queue_free()
 
 
 func refit(metric_size: Vector2) -> void:
